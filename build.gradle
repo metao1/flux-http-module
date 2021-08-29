@@ -4,10 +4,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
-    id 'org.springframework.boot' version '2.5.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
-
 
 group 'com.metao.http'
 version = '1.0-SNAPSHOT'
@@ -34,7 +31,7 @@ sourceCompatibility = '16'
 
 dependencies {
 
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'io.projectreactor:reactor-core:3.4.9'
 
     /** Okhttp client*/
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
@@ -52,8 +49,6 @@ dependencies {
     /** Jupiter */
     testImplementation "org.junit.jupiter:junit-jupiter-api:${jupiterVersion}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${jupiterVersion}"
-
-
 }
 
 test {
