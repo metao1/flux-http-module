@@ -4,7 +4,7 @@ import com.metao.http.exception.HttpRequestException;
 import com.metao.http.model.http.HttpParameter;
 import com.metao.http.model.response.HttpResponse;
 import com.metao.http.model.http.JsonObject;
-import com.metao.http.service.HttpClientAgent;
+import com.metao.http.service.Http2Client;
 import com.metao.http.service.HttpClientBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ class HttpClientBuilderTest {
 
     @Test
     void onlyGet() throws HttpRequestException {
-        HttpClientAgent clientAgent = new HttpClientBuilder()
+        Http2Client clientAgent = new HttpClientBuilder()
                 .build();
         HttpResponse httpResponse = clientAgent.get("https://google.com");
         assertEquals(200, httpResponse.getStatusCode());
@@ -29,7 +29,7 @@ class HttpClientBuilderTest {
 
     @Test
     void getWithParam() throws HttpRequestException {
-        HttpClientAgent clientAgent = new HttpClientBuilder()
+        Http2Client clientAgent = new HttpClientBuilder()
                 .build();
         HttpParameter[] httpParameters =  new HttpParameter[]{new HttpParameter("id", "1424535306225831944")};
         HttpResponse httpResponse = clientAgent.get("https://api.twitter.com/1/statuses/oembed.json", httpParameters, null, null);
@@ -40,7 +40,7 @@ class HttpClientBuilderTest {
 
     @Test
     void getJsonObject() throws HttpRequestException {
-        HttpClientAgent clientAgent = new HttpClientBuilder()
+        Http2Client clientAgent = new HttpClientBuilder()
                 .build();
         HttpParameter[] httpParameters =  new HttpParameter[]{new HttpParameter("id", "1424535306225831944")};
         HttpResponse httpResponse = clientAgent.get("https://api.twitter.com/1/statuses/oembed.json", httpParameters , null, null);

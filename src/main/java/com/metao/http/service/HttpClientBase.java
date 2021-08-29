@@ -6,7 +6,7 @@ import com.metao.http.model.request.HttpRequest;
 import com.metao.http.model.request.RequestHeader;
 import com.metao.http.model.request.RequestMethod;
 import com.metao.http.model.response.HttpResponse;
-import com.metao.http.model.response.ResponseEvent;
+import com.metao.http.model.response.HttpEvent;
 import com.metao.http.utils.Version;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,11 +49,11 @@ public abstract class HttpClientBase implements HttpClient {
         try {
             res = handleRequest(req);
             if (listener != null) {
-                listener.onResponse(ResponseEvent.createResponseEvent(req, res));
+                listener.onResponse(HttpEvent.createRequestResponseEvent(req, res));
             }
             return res;
         } catch (HttpRequestException e) {
-            listener.onResponse(ResponseEvent.createResponseEvent(req, null, e));
+            listener.onResponse(HttpEvent.createRequestResponseEvent(req, null, e));
             throw e;
         }
     }
@@ -65,7 +65,7 @@ public abstract class HttpClientBase implements HttpClient {
 
     @Override
     public HttpResponse post(String url) throws HttpRequestException {
-        return request(new HttpRequest(url, RequestMethod.POST, null, this.reqHeaders, null));
+        return request(new HttpRequest(url, RequestMethod.POST, null, this.reqHeaders, getAuthorization()));
     }
 
     @Override
@@ -75,7 +75,7 @@ public abstract class HttpClientBase implements HttpClient {
 
     @Override
     public HttpResponse get(String url) throws HttpRequestException {
-        return request(new HttpRequest(url, RequestMethod.GET, null, this.reqHeaders, null));
+        return request(new HttpRequest(url, RequestMethod.GET, null, this.reqHeaders,  getAuthorization()));
     }
 
     @Override
@@ -84,4 +84,6 @@ public abstract class HttpClientBase implements HttpClient {
     }
 
     protected abstract HttpResponse handleRequest(HttpRequest req) throws HttpRequestException;
+
+    protected abstract Authorization getAuthorization();
 }

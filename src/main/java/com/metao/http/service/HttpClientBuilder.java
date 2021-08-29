@@ -16,7 +16,7 @@ public class HttpClientBuilder {
         return this;
     }
 
-    public HttpClientAgent build() {
-        return new HttpClientAgent(this.authorization);
+    public Http2Client build() {
+        return new Http2Client(this.authorization);
     }
 }
