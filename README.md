@@ -1,1 +1,1 @@
-![build](https://github.com/metao1/graalvm-microservice-demo/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+![build](https://github.com/metao1/flux-http-module/actions/workflows/gradle-publish.yml/badge.svg)
