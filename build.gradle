@@ -58,62 +58,6 @@ java {
     withSourcesJar()
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'my-library'
-            from components.java
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-            pom {
-                name = 'My Library'
-                description = 'A concise description of my library'
-                url = 'https://www.example.com/library'
-                properties = [
-                        myProp: "value",
-                        "prop.with.dots": "anotherValue"
-                ]
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'metao1'
-                        name = 'Mehrdad Karami'
-                        email = 'mehrdad.karami@gmail.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://example.com/my-library.git'
-                    developerConnection = 'scm:git:ssh://example.com/my-library.git'
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-        }
-    }
-}
-
-signing {
-    sign publishing.publications.mavenJava
-}
-
-
 javadoc {
     if (JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
