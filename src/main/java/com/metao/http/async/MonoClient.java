@@ -6,6 +6,7 @@ import com.metao.http.model.request.HttpRequest;
 import com.metao.http.model.response.HttpResponse;
 import com.metao.http.service.Authorization;
 import com.metao.http.service.HttpEventListener;
+import reactor.core.publisher.Mono;
 
 public interface MonoClient {
 
