@@ -3,15 +3,15 @@ package com.metao.http.service;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class HttpClientBuilder {
+public class Http2ClientBuilder {
 
     private Authorization authorization;
 
-    public HttpClientBuilder() {
+    public Http2ClientBuilder() {
 
     }
 
-    public HttpClientBuilder authorization(Authorization authorization) {
+    public Http2ClientBuilder authorization(Authorization authorization) {
         this.authorization = authorization;
         return this;
     }
